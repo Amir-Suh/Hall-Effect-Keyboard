@@ -1,0 +1,49 @@
+/*
+ * Design tokens extracted from the reference images (Wootility v5.3.1 style).
+ * Dark is the default theme; light matches the Rapid Trigger reference.
+ * Components reference these via Tailwind color names (see tailwind.config.cjs),
+ * so the same component tree renders correctly in both themes.
+ */
+
+:root,
+:root[data-theme='dark'] {
+  --bg: #17181c;
+  --panel: #1e1f25;
+  --panel-2: #24262e;
+  --sidebar: #121317;
+  --border: #2a2c33;
+  --text: #ecedef;
+  --muted: #8a9099;
+  --accent: #4c8dff;
+  --accent-fg: #ffffff;
+  --accent-soft: rgba(76, 141, 255, 0.16);
+  --demo: #f5c518;
+  --demo-fg: #1a1a1a;
+  --key: #2a2c33;
+  --key-label: #ecedef;
+  --selected: #4c8dff;
+  --callout-bg: rgba(76, 141, 255, 0.12);
+  --callout-border: rgba(76, 141, 255, 0.35);
+  --success: #34d399;
+}
+
+:root[data-theme='light'] {
+  --bg: #f4f5f7;
+  --panel: #ffffff;
+  --panel-2: #f0f1f3;
+  --sidebar: #ffffff;
+  --border: #e5e7eb;
+  --text: #1f2328;
+  --muted: #8a9099;
+  --accent: #3b82f6;
+  --accent-fg: #ffffff;
+  --accent-soft: rgba(59, 130, 246, 0.12);
+  --demo: #f5c518;
+  --demo-fg: #1a1a1a;
+  --key: #edeff2;
+  --key-label: #1f2328;
+  --selected: #3b82f6;
+  --callout-bg: rgba(59, 130, 246, 0.1);
+  --callout-border: rgba(59, 130, 246, 0.3);
+  --success: #059669;
+}

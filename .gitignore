@@ -1,0 +1,13 @@
+# Dependencies & build output (also covered by configurator/.gitignore)
+node_modules/
+dist/
+dist-ssr/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.local

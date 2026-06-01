@@ -1,0 +1,44 @@
+@import './tokens.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family:
+      Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Smooth theme transitions on surfaces/text */
+  body,
+  [data-theme] {
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+}
+
+@layer components {
+  /* Uppercase, letter-spaced caption text seen throughout the references */
+  .caption {
+    @apply text-[11px] font-semibold uppercase tracking-wider text-muted;
+  }
+}
+
+/* Focus ring for keyboard navigation (accessibility) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
