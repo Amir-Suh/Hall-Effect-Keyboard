@@ -1,10 +1,11 @@
 /**
  * Hall-effect value ranges (millimetres). See DESIGN.md → Assumptions for sources.
- * Assumes a Lekker-class switch with ~4.0 mm total travel.
+ * The firmware maps distance 0..255 to 3.5 mm of travel (distance.h), so the UI
+ * uses the same full-travel figure to keep mm↔unit conversion exact.
  */
-export const MAX_TRAVEL = 4.0; // mm
+export const MAX_TRAVEL = 3.5; // mm — matches firmware 255-unit full press
 
-export const ACTUATION = { min: 0.1, max: 4.0, step: 0.1, default: 1.5 } as const;
+export const ACTUATION = { min: 0.1, max: 3.5, step: 0.1, default: 1.5 } as const;
 export const RT_SENS = { min: 0.1, max: 2.0, step: 0.05, default: 0.5 } as const;
 
 export interface RapidTriggerConfig {

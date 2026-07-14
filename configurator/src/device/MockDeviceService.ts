@@ -1,7 +1,8 @@
 import type { DeviceService } from './DeviceService';
-import type { DeviceInfo, KeyStateMap } from '../types/device';
+import type { DeviceConfig, DeviceInfo, KeyStateMap } from '../types/device';
 import { ALL_KEY_IDS } from '../data/layout60';
 import { MAX_TRAVEL } from '../types/config';
+import { cloneDeviceConfig, defaultDeviceConfig } from './protocol';
 
 const DEMO_DEVICE: DeviceInfo = {
   id: 'wooting-60he-demo',
@@ -24,6 +25,8 @@ export class MockDeviceService implements DeviceService {
   private subscribers = new Set<(s: KeyStateMap) => void>();
   private active = new Map<string, { start: number; dur: number }>();
   private connected = false;
+  /** In-memory stand-in for the device's persistent config. */
+  private config: DeviceConfig = defaultDeviceConfig();
 
   async listDevices(): Promise<DeviceInfo[]> {
     await delay(250);
@@ -41,6 +44,28 @@ export class MockDeviceService implements DeviceService {
     this.connected = false;
     this.stopStream();
     this.emit({});
+  }
+
+  async readConfig(): Promise<DeviceConfig> {
+    await delay(120);
+    return cloneDeviceConfig(this.config);
+  }
+
+  async writeConfig(patch: Partial<DeviceConfig>): Promise<void> {
+    await delay(200); // simulate the eeconfig_save() stall
+    if (patch.actuation) this.config.actuation = patch.actuation.map((a) => ({ ...a }));
+    if (patch.keymap) this.config.keymap = patch.keymap.map((l) => l.slice());
+    if (patch.rtEnabled !== undefined) this.config.rtEnabled = patch.rtEnabled;
+    if (patch.socdEnabled !== undefined) this.config.socdEnabled = patch.socdEnabled;
+  }
+
+  async resetConfig(): Promise<void> {
+    await delay(200);
+    this.config = defaultDeviceConfig();
+  }
+
+  async recalibrate(): Promise<void> {
+    await delay(200);
   }
 
   subscribeKeyState(cb: (s: KeyStateMap) => void): () => void {
